@@ -6,10 +6,19 @@ from .forms import PostForm
 
 def post_list(request):
     qs = Post.objects.all()
-    qs = qs.filter(created_date__lte=timezone.now())
-    qs = qs.order_by('-created_date')
+    qs = qs.filter(published_date__lte=timezone.now())
+    qs = qs.order_by('-published_date')
 
     return render(request, 'blog/post_list.html', {
+        'post_list': qs,
+    })
+
+def post_draft_list(request):
+    qs = Post.objects.all()
+    qs = qs.filter(published_date__isnull=True)
+    qs = qs.order_by('created_date')
+
+    return render(request, 'blog/post_draft_list.html', {
         'post_list': qs,
     })
 
@@ -30,9 +39,8 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', post.id)
+            return redirect('post_detail', id=post.id)
     else:
         form = PostForm()
 
@@ -48,12 +56,21 @@ def post_edit(request, id):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', post.id)
+            return redirect('post_detail', id=post.id)
     else:
         form = PostForm(instance=post)
 
     return render(request, 'blog/post_edit.html', {
         'form': form,
     })
+
+def post_publish(request, id):
+    post = get_object_or_404(Post, pk=id)
+    post.publish()
+    return redirect('post_detail', id=post.id)
+
+def post_remove(request, id):
+    post = get_object_or_404(Post, pk=id)
+    post.delete()
+    return redirect('post_list')
