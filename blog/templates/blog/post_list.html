@@ -6,8 +6,7 @@
       <div class="date">
         <p>created: {{ post.created_date }}</p>
       </div>
-      <h1><a href="">{{ post.title }}</a></h1>
-      <p>{{ post.text|linebreaks }}</p>
+      <h1><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h1>
       <hr>
     </div>
   {% endfor %}
