@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 
 def post_list(request):
@@ -86,3 +86,30 @@ def post_remove(request, id):
     post = get_object_or_404(Post, pk=id)
     post.delete()
     return redirect('post_list')
+
+
+def add_comment_to_post(request, id):
+    post = get_object_or_404(Post, pk=id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', id=post.id)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+
+
+@login_required
+def comment_approve(request, id):
+    comment = get_object_or_404(Comment, pk=id)
+    comment.approve()
+    return redirect('post_detail', id=comment.post.id)
+
+@login_required
+def comment_remove(request, id):
+    comment = get_object_or_404(Comment, pk=id)
+    comment.delete()
+    return redirect('post_detail', id=comment.post.id)
