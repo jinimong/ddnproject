@@ -42,8 +42,7 @@
           <p>{{ comment.text|linebreaks }}</p>
       </div>
     {% endif %}
-
   {% empty %}
-      <p>No comments here yet :(</p>
+      <div class="comment"><p>No comments here yet :(</p></div>
   {% endfor %}
 {% endblock %}
