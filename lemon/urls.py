@@ -18,7 +18,8 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('ddn-admin/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('blog/', include('blog.urls')),
     path('shop/', include('shop.urls')),
     path('accounts/login/', LoginView.as_view(), name='login'),
