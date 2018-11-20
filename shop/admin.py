@@ -1,3 +1,12 @@
 from django.contrib import admin
+from .models import Item
 
-# Register your models here.
+@admin.register(Item)
+class ItemAdimin(admin.ModelAdmin):
+    list_display = ['pk', 'name', 'short_desc', 'price', 'is_published']
+    list_display_links = ['name']
+    list_filter = ['is_published', 'updated_at']
+    search_fields = ['name']
+
+    def short_desc(self, item):
+        return item.desc[:20] + '...' if len(item.desc) < 20 else item.desc
