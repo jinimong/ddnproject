@@ -21,3 +21,16 @@ def item_list(request):
         'item_list': qs,
         'word': word,
     })
+
+def item_list_test_jinja(request):
+    qs = Item.objects.all()
+
+    word = request.GET.get('word', '')
+    if word:
+        qs = qs.filter(name__icontains=word)
+        logger.debug(f'query: {word}')
+
+    return render(request, 'shop/item_list.jinja', {
+        'item_list': qs,
+        'word': word,
+    })
