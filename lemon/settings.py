@@ -134,3 +134,40 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.15']
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'write_to_file': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.FileHandler',
+            'filename': 'db.log',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['write_to_file'],
+            'level': 'DEBUG',
+        },
+        'blog': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'shop': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
