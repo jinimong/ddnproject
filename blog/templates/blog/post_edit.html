@@ -1,6 +1,6 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/layout.html' %}
 
-{% block content %}
+{% block blog_content %}
     <h1>New post</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}

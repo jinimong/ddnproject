@@ -9,5 +9,5 @@ app_name = 'shop'
 urlpatterns = [
     path('archives/<yyyy:year>/', views.archives_year),
     path('', views.item_list, name='item_list'),
-    path('test_jinja/', views.item_list_test_jinja, name='item_list_test_jinja'),    
+    path('<int:id>/', views.item_detail, name='item_detail'),
 ]

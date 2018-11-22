@@ -1,6 +1,6 @@
 import logging
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Item
 
@@ -22,15 +22,8 @@ def item_list(request):
         'word': word,
     })
 
-def item_list_test_jinja(request):
-    qs = Item.objects.all()
-
-    word = request.GET.get('word', '')
-    if word:
-        qs = qs.filter(name__icontains=word)
-        logger.debug(f'query: {word}')
-
-    return render(request, 'shop/item_list.jinja', {
-        'item_list': qs,
-        'word': word,
+def item_detail(request, id):
+    item = get_object_or_404(Item, pk=id)
+    return render(request, 'shop/item_detail.html', {
+        'item': item,
     })

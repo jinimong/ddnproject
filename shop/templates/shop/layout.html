@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+  Shop by Lemon Project
+{% endblock %}
+
+{% block extra_head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'shop/shop.css' %}">
+{% endblock %}
+
+{% block extra_body %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <h1>Lemon's Shop</h1>
+  <hr>
+  {% block shop_content %}
+  {% endblock %}
+{% endblock %}

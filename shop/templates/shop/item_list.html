@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html
-  <head>
-    <meta charset="utf-8">
-    <title>Lemon's Shop</title>
-  </head>
-  <body>
-    <h1>Lemon's Item List</h1>
+{% extends "shop/layout.html" %}
 
-    <form action="" method="GET">
-      <input type="text" name="word" value="{{ word }}">
-      <input type="submit" value="search">
-    </form>
+{% block shop_content %}
+  <form action="" method="GET">
+    <input type="text" name="word" value="{{ word }}">
+    <input type="submit" value="search">
+  </form>
 
-    <ul>
-      {% for item in item_list %}
-        <li>
+  <ul>
+    {% for item in item_list %}
+      <li>
+        <a href="/shop/{{ item.id }}/">
           <p>이름 : {{ item.name }}</p>
-          <p>가격 : {{ item.price }}</p>
-          <p>설명 : {{ item.desc }}</p>
-        </li>
-      {% endfor %}
-    </ul>
-
-  </body>
-</html>
+        </a>
+        <p>가격 : {{ item.price }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
