@@ -19,6 +19,10 @@
     {% endif %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.text|linebreaks }}</p>
+
+    {% if post.photo %}
+      <img src="{{ post.photo.url }}" style="max-width: 100%;"><br>
+    {% endif %}
   </div>
   <hr>
   <a class="btn btn-default" href="{% url 'add_comment_to_post' post.id %}">Add comment</a>
