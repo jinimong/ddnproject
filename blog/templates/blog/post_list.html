@@ -6,8 +6,8 @@
       <div class="date">
         <p>published: {{ post.published_date }}</p>
       </div>
-      <h1><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h1>
-      <a href="{% url 'post_detail' post.id %}">Comments: {{ post.approved_comments.count }}</a>
+      <h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+      <a href="{{ post.get_absolute_url }}">Comments: {{ post.approved_comments.count }}</a>
       <hr>
     </div>
   {% endfor %}

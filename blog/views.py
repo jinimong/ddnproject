@@ -46,7 +46,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('post_detail', id=post.id)
+            return redirect('blog:post_detail', id=post.id)
     else:
         form = PostForm()
 
@@ -65,7 +65,7 @@ def post_edit(request, id):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('post_detail', id=post.id)
+            return redirect('blog:post_detail', id=post.id)
     else:
         form = PostForm(instance=post)
 
@@ -78,14 +78,14 @@ def post_edit(request, id):
 def post_publish(request, id):
     post = get_object_or_404(Post, pk=id)
     post.publish()
-    return redirect('post_detail', id=post.id)
+    return redirect('blog:post_detail', id=post.id)
 
 
 @login_required
 def post_remove(request, id):
     post = get_object_or_404(Post, pk=id)
     post.delete()
-    return redirect('post_list')
+    return redirect('blog:post_list')
 
 
 def add_comment_to_post(request, id):
@@ -96,7 +96,7 @@ def add_comment_to_post(request, id):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('post_detail', id=post.id)
+            return redirect('blog:post_detail', id=post.id)
     else:
         form = CommentForm()
     return render(request, 'blog/add_comment_to_post.html', {'form': form})
