@@ -39,16 +39,16 @@ def post_detail(request, id):
 
 
 @login_required
-def post_new(request):
+def post_new(request, post=None):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('blog:post_detail', id=post.id)
+            return redirect(post)
     else:
-        form = PostForm()
+        form = PostForm(instance=post)
 
     return render(request, 'blog/post_edit.html', {
         'form': form,
@@ -58,20 +58,7 @@ def post_new(request):
 @login_required
 def post_edit(request, id):
     post = get_object_or_404(Post, pk=id)
-
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('blog:post_detail', id=post.id)
-    else:
-        form = PostForm(instance=post)
-
-    return render(request, 'blog/post_edit.html', {
-        'form': form,
-    })
+    return post_new(request, post)
 
 
 @login_required
