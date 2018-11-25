@@ -22,7 +22,7 @@
     {% endif %}
 
     {% if item.desc %}
-      <p>설명: {{ item.desc }}</p>
+      <p>설명: {{ item.desc|linebreaks }}</p>
     {% endif %}
   </div>
 
