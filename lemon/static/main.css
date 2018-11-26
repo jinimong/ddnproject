@@ -28,3 +28,11 @@ h1, h2, h3, h4 {
     font-size: 26pt;
     margin-right: 20px;
 }
+
+.save {
+    float: right;
+}
+
+.content {
+    margin-left: 40px;
+}
