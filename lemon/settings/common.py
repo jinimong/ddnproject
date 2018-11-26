@@ -97,7 +97,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'lemon.wsgi.application'
+WSGI_APPLICATION = 'lemon.wsgi.heroku.application'
 
 
 # Database
