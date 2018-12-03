@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Item
 
 @admin.register(Item)
-class ItemAdimin(admin.ModelAdmin):
+class ItemAdmin(admin.ModelAdmin):
     list_display = ['pk', 'name', 'short_desc', 'price', 'is_published']
     list_display_links = ['name']
     list_filter = ['is_published', 'updated_at']
