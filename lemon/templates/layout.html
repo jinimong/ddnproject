@@ -25,11 +25,11 @@
             <p class="top-menu">
               Hello, {{ user.username }}
               <small>
-                (<a href="{% url 'logout' %}">Log out</a>)
+                (<a href="{% url 'accounts:logout' %}">Log out</a>)
               </small>
             </p>
           {% else %}
-            <a href="{% url 'login' %}?next={{ request.path }}" class="top-menu">
+            <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="top-menu">
               <span class="glyphicon glyphicon-lock"></span>
             </a>
           {% endif %}
