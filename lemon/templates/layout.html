@@ -25,7 +25,7 @@
             <p class="top-menu">
               Hello, <a href="{% url 'accounts:profile' %}">{{ user.username }}</a>
               <small>
-                (<a href="{% url 'accounts:logout' %}">Log out</a>)
+                (<a href="{% url 'accounts:logout' %}?next={{ request.path }}">Log out</a>)
               </small>
             </p>
           {% else %}

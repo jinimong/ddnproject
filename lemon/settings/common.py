@@ -160,6 +160,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = reverse_lazy('accounts:profile')
+LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.15']
 
