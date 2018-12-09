@@ -1,8 +1,12 @@
-<form method="post" action="">
-{% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
+{% extends "accounts/layout.html" %}
 
-    <input type="submit" value="login" />
-</form>
+{% block content %}
+  <form method="post" action="">
+  {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+
+      <input type="submit" value="login" />
+  </form>
+{% endblock %}
