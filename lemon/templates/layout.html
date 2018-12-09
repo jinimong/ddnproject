@@ -23,7 +23,7 @@
 
             {% endblock %}
             <p class="top-menu">
-              Hello, {{ user.username }}
+              Hello, <a href="{% url 'accounts:profile' %}">{{ user.username }}</a>
               <small>
                 (<a href="{% url 'accounts:logout' %}">Log out</a>)
               </small>
