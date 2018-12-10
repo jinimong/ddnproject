@@ -2,5 +2,5 @@
 
 {% block content %}
   <h2>{{user}}'s profile</h2>
-  <p>...</p>
+  bio : {{ user.profile.bio|default:'empty' }}
 {% endblock %}
