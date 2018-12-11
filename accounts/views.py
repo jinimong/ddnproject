@@ -5,6 +5,20 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from .forms import SignupForm
 
+# signup 함수 기반 뷰
+'''
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect(settings.LOGIN_URL)
+    else:
+        form = SignupForm()
+    return render(request, 'accounts/signup.html', {
+        'form': form,
+    })
+'''
 
 signup = CreateView.as_view(
     model=User,
