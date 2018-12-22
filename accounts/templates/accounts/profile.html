@@ -2,5 +2,9 @@
 
 {% block content %}
   <h2>{{user}}'s profile</h2>
-  bio : {{ user.profile.bio|default:'empty' }}
+  <h3>e-mail</h3>
+  {{ user.email|default:'&dash;' }}
+  
+  <h3>bio</h3>
+  {{ user.profile.bio|default:'&dash;' }}
 {% endblock %}
