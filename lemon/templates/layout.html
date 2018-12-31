@@ -46,7 +46,18 @@
           </div>
         </div>
 
-        <hr>
+        <hr/>
+
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <hr/>
+    
         &copy;
         <script type="text/JavaScript">
           var theDate = new Date().getFullYear()
