@@ -5,8 +5,9 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import PasswordResetView
-from django.shortcuts import render, redirect, resolve_url
+from django.contrib.auth.views import PasswordResetView, PasswordChangeView, PasswordChangeDoneView
+from django.shortcuts import render, redirect, resolve_url 
+from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.http import Http404
 from django.utils.http import urlsafe_base64_decode
@@ -74,3 +75,12 @@ def login_via_url(request, uidb64, token):
 
     messages.error(request, '로그인이 거부되었습니다.')
     return redirect(redirect_path)
+
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = 'accounts/password_change_form.html'
+    success_url = reverse_lazy('accounts:password_change_done')
+
+
+class MyPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = 'accounts/password_change_done.html'
