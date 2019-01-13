@@ -12,6 +12,10 @@
       <input type="submit" value="login" />
   </form>
   <hr>
-  
-  <a href="{% url 'accounts:request_login_via_url' %}">이메일로 로그인하기</a>
+  <div>
+    <a href="{% url 'accounts:request_login_via_url' %}">이메일로 로그인하기</a>
+  </div>
+  <div>
+    <a href="{% url 'accounts:password_reset' %}">이메일로 암호 재설정하기</a>
+  </div>
 {% endblock %}
